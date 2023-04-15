@@ -1,0 +1,24 @@
+/* src/app/containers/ExpenseTracker/components/BudgetInfo.module.css */
+.budgetInfo {
+  margin-top: 1rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 1rem;
+  appearance: none;
+  border: none;
+  background-color: #eee;
+}
+
+.progressBar::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+.progressBar::-webkit-progress-value {
+  background-color: #007bff;
+}
+
+.progressBar::-moz-progress-bar {
+  background-color: #007bff;
+}
