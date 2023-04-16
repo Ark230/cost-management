@@ -16,4 +16,15 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "./src/styles"),
     },
   },
+  server: {
+    fs: {
+      strict: false,
+    },
+  },
+  define: {
+    "process.env": {},
+  },
+  build: {
+    sourcemap: true,
+  },
 });

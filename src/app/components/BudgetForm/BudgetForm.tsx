@@ -11,7 +11,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ setMonthlyBudget }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setMonthlyBudget(parseFloat(budgetInput.current.value));
+    setMonthlyBudget(parseFloat(budgetInput.current!.value));
   };
 
   return (

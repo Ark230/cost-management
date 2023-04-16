@@ -9,6 +9,7 @@ import {
   ExpenseTable,
   BudgetInfo,
 } from "@components/index";
+import { calculateCurrentMonthExpenses } from "./helpers/index.js";
 
 import styles from "./ExpenseTracker.module.css";
 
@@ -22,22 +23,6 @@ const ExpenseTracker: React.FC = () => {
 
   const expenses = useSelector((state: RootState) => state.expenses);
   const dispatch = useDispatch();
-
-  const calculateCurrentMonthExpenses = (): number => {
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
-    const currentMonthExpenses = expenses.filter((expense) => {
-      const expenseDate = new Date(expense.date);
-      return (
-        expenseDate.getMonth() === currentMonth &&
-        expenseDate.getFullYear() === currentYear
-      );
-    });
-    return currentMonthExpenses.reduce(
-      (acc, expense) => acc + expense.amount,
-      0
-    );
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +52,7 @@ const ExpenseTracker: React.FC = () => {
         <ExpenseTable expenses={expenses} />
         <BudgetInfo
           monthlyBudget={monthlyBudget}
-          totalExpenses={calculateCurrentMonthExpenses()}
+          totalExpenses={calculateCurrentMonthExpenses(expenses)}
         />
       </div>
     </div>
