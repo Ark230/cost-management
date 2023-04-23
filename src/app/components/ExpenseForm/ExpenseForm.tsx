@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "@redux/actions/expenseActions";
 import { Expense } from "@domain/entities/Expense";
-import styles from "./ExpenseForm.module.css";
+import styles from "./ExpenseForm.module.scss";
 
 interface ExpenseFormProps {
   categories: string[];

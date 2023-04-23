@@ -1,6 +1,6 @@
 // src/app/containers/ExpenseTracker/components/BudgetForm.tsx
 import React, { useRef } from "react";
-import styles from "./BudgetForm.module.css";
+import styles from "./BudgetForm.module.scss";
 
 export interface BudgetFormProps {
   setMonthlyBudget: (budget: number) => void;

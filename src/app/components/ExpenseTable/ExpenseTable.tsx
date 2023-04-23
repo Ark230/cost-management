@@ -1,7 +1,7 @@
 // src/app/containers/ExpenseTracker/components/ExpenseTable.tsx
 import React from "react";
 import { Expense } from "@domain/entities/Expense";
-import styles from "./ExpenseTable.module.css";
+import styles from "./ExpenseTable.module.scss";
 
 interface ExpenseTableProps {
   expenses: Expense[];

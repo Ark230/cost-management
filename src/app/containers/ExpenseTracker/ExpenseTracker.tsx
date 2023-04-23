@@ -11,7 +11,7 @@ import {
 } from "@components/index";
 import { calculateCurrentMonthExpenses } from "./helpers/index.js";
 
-import styles from "./ExpenseTracker.module.css";
+import styles from "./ExpenseTracker.module.scss";
 
 const ExpenseTracker: React.FC = () => {
   const [description, setDescription] = useState("");

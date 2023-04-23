@@ -1,6 +1,6 @@
 // src/app/containers/ExpenseTracker/components/BudgetInfo.tsx
 import React from "react";
-import styles from "./BudgetInfo.module.css";
+import styles from "./BudgetInfo.module.scss";
 
 interface BudgetInfoProps {
   monthlyBudget: number;
