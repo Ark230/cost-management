@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import styles from "./BudgetForm.module.css";
 
-interface BudgetFormProps {
+export interface BudgetFormProps {
   setMonthlyBudget: (budget: number) => void;
 }
 
@@ -15,17 +15,19 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ setMonthlyBudget }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="monthlyBudget">Set Monthly Budget:</label>
-      <input
-        type="number"
-        id="monthlyBudget"
-        step="0.01"
-        min="0"
-        ref={budgetInput}
-      />
-      <button type="submit">Set Budget</button>
-    </form>
+    (
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label htmlFor="monthlyBudget">Set Monthly Budget:</label>
+        <input
+          type="number"
+          id="monthlyBudget"
+          step="0.01"
+          min="0"
+          ref={budgetInput}
+        />
+        <button type="submit">Set Budget</button>
+      </form>
+    ) ?? null
   );
 };
 
