@@ -3,11 +3,11 @@ import React from "react";
 import { Expense } from "@domain/entities/Expense";
 import styles from "./ExpenseTable.module.scss";
 
-interface ExpenseTableProps {
+export interface ExpenseTableProps {
   expenses: Expense[];
 }
 
-const ExpenseTable: React.FC<ExpenseTableProps> = ({ expenses }) => {
+const ExpenseTable = ({ expenses }: ExpenseTableProps) => {
   return (
     <table className={styles.expensesTable}>
       <thead>

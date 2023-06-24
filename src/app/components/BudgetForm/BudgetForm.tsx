@@ -6,7 +6,7 @@ export interface BudgetFormProps {
   setMonthlyBudget: (budget: number) => void;
 }
 
-const BudgetForm: React.FC<BudgetFormProps> = ({ setMonthlyBudget }) => {
+const BudgetForm = ({ setMonthlyBudget }: BudgetFormProps) => {
   const budgetInput = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {

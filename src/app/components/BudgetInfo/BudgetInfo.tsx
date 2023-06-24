@@ -7,10 +7,7 @@ interface BudgetInfoProps {
   totalExpenses: number;
 }
 
-const BudgetInfo: React.FC<BudgetInfoProps> = ({
-  monthlyBudget,
-  totalExpenses,
-}) => {
+const BudgetInfo = ({ monthlyBudget, totalExpenses }: BudgetInfoProps) => {
   const remainingBudget = monthlyBudget - totalExpenses;
 
   return (

@@ -1,6 +1,6 @@
+import BudgetForm from "./BudgetForm";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import BudgetForm from "./BudgetForm";
 
 describe("BudgetForm", () => {
   it("calls setMonthlyBudget with the input value when the form is submitted", () => {

@@ -9,7 +9,7 @@ interface ExpenseFormProps {
   categories: string[];
 }
 
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
+const ExpenseForm = ({ categories }: ExpenseFormProps) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState<number>(0);
   const [category, setCategory] = useState("");
@@ -37,6 +37,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
     <form onSubmit={handleSubmit} className={styles.form}>
       <label htmlFor="description">Expense Name:</label>
       <input
+        name="expense-description"
         type="text"
         id="description"
         value={description}
@@ -44,6 +45,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
       />
       <label htmlFor="amount">Amount:</label>
       <input
+        name="expense-amount"
         type="number"
         id="amount"
         step="0.01"
@@ -53,6 +55,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
       />
       <label htmlFor="category">Category:</label>
       <select
+        name="expense-category"
         id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
