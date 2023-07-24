@@ -15,7 +15,7 @@ import styles from "./ExpenseTracker.module.scss";
 const ExpenseTracker = () => {
   const categories = ["Groceries", "Tools", ""];
   const [monthlyBudget, setMonthlyBudget] = useState<number>(0);
-  const expenses = useSelector((state: RootState) => state.expenses);
+  const expenses = useSelector((state: RootState) => state.expenses.content);
 
   return (
     <div className={styles.container}>
@@ -23,11 +23,11 @@ const ExpenseTracker = () => {
         <h1>Expense Tracker</h1>
         <BudgetForm setMonthlyBudget={setMonthlyBudget} />
         <ExpenseForm categories={categories} />
-        <ExpenseTable expenses={expenses} />
         <BudgetInfo
           monthlyBudget={monthlyBudget}
           totalExpenses={calculateCurrentMonthExpenses(expenses)}
         />
+        <ExpenseTable expenses={expenses} />
       </div>
     </div>
   );

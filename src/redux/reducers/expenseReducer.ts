@@ -1,19 +1,17 @@
-// src/state/reducers/expenseReducer.ts
-import { ADD_EXPENSE, AddExpenseAction } from "../actions/expenseActions";
-import { Expense } from "../../domain/entities/Expense";
+import { initialState } from "@/domain/entities/redux/expense";
 
-export type ExpenseState = Expense[];
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: ExpenseState = [];
+import * as managementReducers from "@redux/reducers/expenses/management";
 
-export const expenseReducer = (
-  state = initialState,
-  action: AddExpenseAction
-): ExpenseState => {
-  switch (action.type) {
-    case ADD_EXPENSE:
-      return [...state, action.payload];
-    default:
-      return state;
-  }
-};
+const expensesSlice = createSlice({
+  name: "expenses",
+  initialState,
+  reducers: {
+    ...managementReducers,
+  },
+});
+
+export const { addExpense } = expensesSlice.actions;
+
+export default expensesSlice.reducer;

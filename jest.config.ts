@@ -90,6 +90,15 @@ export default {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@app/(.*)$": "<rootDir>/src/app/$1",
+    "^@components/(.*)$": "<rootDir>/src/app/components/$1",
+    "^@domain/(.*)$": "<rootDir>/src/domain/$1",
+    "^@data/(.*)$": "<rootDir>/src/data/$1",
+    "^@infrastructure/(.*)$": "<rootDir>/src/infrastructure/$1",
+    "^@redux/(.*)$": "<rootDir>/src/redux/$1",
+    "^@sagas/(.*)$": "<rootDir>/src/infrastructure/redux-saga/$1",
+    "^@styles/(.*)$": "<rootDir>/src/styles/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

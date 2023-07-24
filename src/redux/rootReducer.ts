@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { expenseReducer } from "./reducers/expenseReducer";
+import expenseReducer from "./reducers/expenseReducer";
 
 export const rootReducer = combineReducers({
   expenses: expenseReducer,
