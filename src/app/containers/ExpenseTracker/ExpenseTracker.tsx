@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@redux/rootReducer";
+import { RootState } from "@/application/config/redux/rootReducer.js";
 
 import {
   BudgetForm,

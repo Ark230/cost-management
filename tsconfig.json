@@ -7,7 +7,9 @@
       "@data/*": ["src/data/*"],
       "@components/*": ["src/app/components/*"],
       "@infrastructure/*": ["src/infrastructure/*"],
-      "@redux/*": ["src/redux/*"],
+      "@network/*": ["src/infrastructure/network/*"],
+      "@redux/*": ["src/application/config/redux/*"],
+      "@services/*": ["src/application/config/services/*"],
       "@sagas/*": ["src/infrastructure/redux-saga/*"],
       "@styles/*": ["src/styles/*"]
     },

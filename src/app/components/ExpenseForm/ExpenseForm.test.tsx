@@ -1,7 +1,7 @@
 import { screen, fireEvent, render } from "@testing-library/react";
 import ExpenseForm from "./ExpenseForm";
 import { Provider } from "react-redux";
-import store from "../../../redux/store";
+import store from "../../../application/config/redux/store";
 
 //! FIX This test is not working
 describe("Expense form", () => {
