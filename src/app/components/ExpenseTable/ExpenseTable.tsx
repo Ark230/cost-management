@@ -20,7 +20,7 @@ const ExpenseTable = ({ expenses }: ExpenseTableProps) => {
       <tbody>
         {expenses.map((expense) => (
           <tr key={expense.id}>
-            <td>{expense.description}</td>
+            <td>{expense.name}</td>
             <td>{expense.category}</td>
             <td>${expense.amount}</td>
           </tr>

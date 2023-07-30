@@ -8,3 +8,10 @@ export const addExpense = (
 ) => {
   state.content.push(action.payload);
 };
+
+export const expensesFetched = (
+  state: ExpenseSlice,
+  action: PayloadAction<Expense[]>
+) => {
+  state.content = action.payload;
+};

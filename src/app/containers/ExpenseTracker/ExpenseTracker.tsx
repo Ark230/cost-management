@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/application/config/redux/rootReducer.js";
 
@@ -11,11 +11,17 @@ import {
 import { calculateCurrentMonthExpenses } from "./helpers/index.js";
 
 import styles from "./ExpenseTracker.module.scss";
+import { useDispatch } from "react-redux";
+import { fetchExpenses } from "@/application/config/redux/reducers/expenses/types.js";
 
 const ExpenseTracker = () => {
   const categories = ["Groceries", "Tools", ""];
   const [monthlyBudget, setMonthlyBudget] = useState<number>(0);
   const expenses = useSelector((state: RootState) => state.expenses.content);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchExpenses());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

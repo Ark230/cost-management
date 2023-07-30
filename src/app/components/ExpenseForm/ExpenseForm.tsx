@@ -1,7 +1,7 @@
 // src/app/containers/ExpenseTracker/components/ExpenseForm.tsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExpense } from "@/application/config/redux/reducers";
+import { addExpense } from "@/application/config/redux/reducers/expenses";
 import { Expense } from "@domain/entities/Expense";
 import styles from "./ExpenseForm.module.scss";
 
