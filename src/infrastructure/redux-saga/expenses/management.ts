@@ -3,23 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { Expense } from "@domain/entities/Expense";
 import { expenses } from "@/infrastructure/network";
 import { expensesFetched } from "@/application/config/redux/reducers/expenses";
-
-// import { api } from "@infrastructure/api"; // reemplazar con tu archivo de configuración de la API
-
-// Saga worker para obtener gastos
-// function* fetchExpensesSaga() {
-//   try {
-//     const response: Expense[] = yield call(api.get, "/expenses"); // reemplazar con tu endpoint
-//     yield put(fetchExpensesSuccess(response));
-//   } catch (err) {
-//     // maneja el error aquí
-//   }
-// }
-
-// // Saga watcher para obtener gastos
-// function* watchFetchExpenses() {
-//   yield takeEvery(fetchExpenses.type, fetchExpensesSaga);
-// }
+import { RequestElements } from "@/domain/types/network";
 
 function* fetchExpensesSaga(): Generator<any, void, any> {
   try {
@@ -33,8 +17,25 @@ function* fetchExpensesSaga(): Generator<any, void, any> {
 
 function* addExpenseSaga(action: PayloadAction<Expense>) {
   try {
-    console.log("print desde el saga");
     // const response: Expense[] = yield call(api.get, "/expenses"); // reemplazar con tu endpoint
+    // yield put(fetchExpensesSuccess(response));
+  } catch (err) {
+    // maneja el error aquí
+  }
+}
+
+function* deleteExpenseSaga(
+  action: PayloadAction<Expense>
+): Generator<any, void, any> {
+  try {
+    const requestElements: RequestElements = {
+      pathVariables: { id: action.payload.id.toString() },
+    };
+    console.log("print desde el saga delete");
+    const response: Expense[] = (yield call(
+      expenses.deleteExpense,
+      requestElements
+    )).data; // reemplazar con tu endpoint
     // yield put(fetchExpensesSuccess(response));
   } catch (err) {
     // maneja el error aquí

@@ -13,7 +13,8 @@ const BudgetInfo = ({ monthlyBudget, totalExpenses }: BudgetInfoProps) => {
   return (
     <div className={styles.budgetInfo}>
       <p>
-        Monthly Budget: ${monthlyBudget} | Total Expenses: ${totalExpenses} |
+        Monthly Budget: ${monthlyBudget} | Total Expenses: $
+        {totalExpenses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} |
         Remaining Budget: ${remainingBudget}
       </p>
       <progress

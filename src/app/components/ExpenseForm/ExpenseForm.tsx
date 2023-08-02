@@ -21,7 +21,7 @@ const ExpenseForm = ({ categories }: ExpenseFormProps) => {
 
     const newExpense: Expense = {
       id: Date.now(),
-      description,
+      name: description,
       amount,
       date: new Date().toISOString(),
       category,

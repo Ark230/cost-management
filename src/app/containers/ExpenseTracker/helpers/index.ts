@@ -17,3 +17,7 @@ export const calculateCurrentMonthExpenses = (
     0
   );
 };
+
+export const getTotalExpensesAmount = (expenses: Expense[]): number => {
+  return expenses.reduce((total, expense) => total + expense.amount, 0);
+};

@@ -8,7 +8,7 @@ import {
   ExpenseTable,
   BudgetInfo,
 } from "@components/index";
-import { calculateCurrentMonthExpenses } from "./helpers/index.js";
+import { getTotalExpensesAmount } from "./helpers/index.js";
 
 import styles from "./ExpenseTracker.module.scss";
 import { useDispatch } from "react-redux";
@@ -31,7 +31,7 @@ const ExpenseTracker = () => {
         <ExpenseForm categories={categories} />
         <BudgetInfo
           monthlyBudget={monthlyBudget}
-          totalExpenses={calculateCurrentMonthExpenses(expenses)}
+          totalExpenses={getTotalExpensesAmount(expenses)}
         />
         <ExpenseTable expenses={expenses} />
       </div>
