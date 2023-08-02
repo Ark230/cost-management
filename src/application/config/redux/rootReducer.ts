@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { expenseReducer } from "./reducers/expenseReducer";
+import expenseSlice from "./reducers/expenses";
 
 export const rootReducer = combineReducers({
-  expenses: expenseReducer,
+  expenses: expenseSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

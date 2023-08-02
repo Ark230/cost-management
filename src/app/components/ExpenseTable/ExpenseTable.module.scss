@@ -1,0 +1,12 @@
+.expensesTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+
+  th,
+  td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+  }
+}

@@ -1,15 +1,15 @@
 // src/app/containers/ExpenseTracker/components/ExpenseForm.tsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExpense } from "@redux/actions/expenseActions";
+import { addExpense } from "@/application/config/redux/reducers/expenses";
 import { Expense } from "@domain/entities/Expense";
-import styles from "./ExpenseForm.module.css";
+import styles from "./ExpenseForm.module.scss";
 
 interface ExpenseFormProps {
   categories: string[];
 }
 
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
+const ExpenseForm = ({ categories }: ExpenseFormProps) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState<number>(0);
   const [category, setCategory] = useState("");
@@ -21,7 +21,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
 
     const newExpense: Expense = {
       id: Date.now(),
-      description,
+      name: description,
       amount,
       date: new Date().toISOString(),
       category,
@@ -37,6 +37,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
     <form onSubmit={handleSubmit} className={styles.form}>
       <label htmlFor="description">Expense Name:</label>
       <input
+        name="expense-description"
         type="text"
         id="description"
         value={description}
@@ -44,6 +45,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
       />
       <label htmlFor="amount">Amount:</label>
       <input
+        name="expense-amount"
         type="number"
         id="amount"
         step="0.01"
@@ -53,6 +55,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ categories }) => {
       />
       <label htmlFor="category">Category:</label>
       <select
+        name="expense-category"
         id="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}

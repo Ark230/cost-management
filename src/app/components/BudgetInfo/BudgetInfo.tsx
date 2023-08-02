@@ -1,22 +1,20 @@
 // src/app/containers/ExpenseTracker/components/BudgetInfo.tsx
 import React from "react";
-import styles from "./BudgetInfo.module.css";
+import styles from "./BudgetInfo.module.scss";
 
 interface BudgetInfoProps {
   monthlyBudget: number;
   totalExpenses: number;
 }
 
-const BudgetInfo: React.FC<BudgetInfoProps> = ({
-  monthlyBudget,
-  totalExpenses,
-}) => {
+const BudgetInfo = ({ monthlyBudget, totalExpenses }: BudgetInfoProps) => {
   const remainingBudget = monthlyBudget - totalExpenses;
 
   return (
     <div className={styles.budgetInfo}>
       <p>
-        Monthly Budget: ${monthlyBudget} | Total Expenses: ${totalExpenses} |
+        Monthly Budget: ${monthlyBudget} | Total Expenses: $
+        {totalExpenses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} |
         Remaining Budget: ${remainingBudget}
       </p>
       <progress

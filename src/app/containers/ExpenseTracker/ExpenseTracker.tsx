@@ -1,47 +1,27 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addExpense } from "@redux/actions/expenseActions";
-import { RootState } from "@redux/rootReducer";
-import { Expense } from "@domain/entities/Expense";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/application/config/redux/rootReducer.js";
+
 import {
   BudgetForm,
   ExpenseForm,
   ExpenseTable,
   BudgetInfo,
 } from "@components/index";
-import { calculateCurrentMonthExpenses } from "./helpers/index.js";
+import { getTotalExpensesAmount } from "./helpers/index.js";
 
-import styles from "./ExpenseTracker.module.css";
+import styles from "./ExpenseTracker.module.scss";
+import { useDispatch } from "react-redux";
+import { fetchExpenses } from "@/application/config/redux/reducers/expenses/types.js";
 
-const ExpenseTracker: React.FC = () => {
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [category, setCategory] = useState("");
-  const categories = ["Groceries", "Tools", "Medicine"];
+const ExpenseTracker = () => {
+  const categories = ["Groceries", "Tools", ""];
   const [monthlyBudget, setMonthlyBudget] = useState<number>(0);
-  const budgetInput = useRef<HTMLInputElement>(null);
-
-  const expenses = useSelector((state: RootState) => state.expenses);
+  const expenses = useSelector((state: RootState) => state.expenses.content);
   const dispatch = useDispatch();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!description.trim() || amount <= 0 || !category.trim()) return;
-
-    const newExpense: Expense = {
-      id: Date.now(),
-      description,
-      amount,
-      date: new Date().toISOString(),
-      category, // Add category property
-    };
-
-    dispatch(addExpense(newExpense));
-    setDescription("");
-    setAmount(0);
-    setCategory("");
-    setCategory(""); // Reset the category input
-  };
+  useEffect(() => {
+    dispatch(fetchExpenses());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -49,11 +29,11 @@ const ExpenseTracker: React.FC = () => {
         <h1>Expense Tracker</h1>
         <BudgetForm setMonthlyBudget={setMonthlyBudget} />
         <ExpenseForm categories={categories} />
-        <ExpenseTable expenses={expenses} />
         <BudgetInfo
           monthlyBudget={monthlyBudget}
-          totalExpenses={calculateCurrentMonthExpenses(expenses)}
+          totalExpenses={getTotalExpensesAmount(expenses)}
         />
+        <ExpenseTable expenses={expenses} />
       </div>
     </div>
   );
