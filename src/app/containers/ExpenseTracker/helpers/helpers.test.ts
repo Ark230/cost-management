@@ -8,17 +8,17 @@ describe("current month expenses", () => {
     expenses = [
       {
         id: 1,
-        description: "test1",
+        name: "Chocolate",
         amount: 100,
         date: new Date().toString(),
-        category: "test",
+        category: "Food",
       },
       {
         id: 2,
-        description: "test2",
+        name: "Spaghetti",
         amount: 400,
         date: new Date().toString(),
-        category: "test",
+        category: "Food",
       },
     ];
   });
@@ -37,17 +37,17 @@ describe("current month expenses", () => {
     const expensesForAnotherMonth: Expense[] = [
       {
         id: 1,
-        description: "test1",
+        name: "Chocolate",
         amount: 100,
         date: new Date("2020-01-01").toString(),
-        category: "test",
+        category: "Food",
       },
       {
         id: 2,
-        description: "test2",
+        name: "Spaghetti",
         amount: 400,
         date: new Date("2020-01-01").toString(),
-        category: "test",
+        category: "Food",
       },
     ];
 
@@ -59,17 +59,17 @@ describe("current month expenses", () => {
     const expensesForAnotherMonth: Expense[] = [
       {
         id: 1,
-        description: "test1",
+        name: "Chocolate",
         amount: 100,
         date: new Date("2020-01-01").toString(),
-        category: "test",
+        category: "Food",
       },
       {
         id: 2,
-        description: "test2",
+        name: "Spaghetti",
         amount: 400,
         date: new Date().toString(),
-        category: "test",
+        category: "Food",
       },
     ];
 
@@ -81,17 +81,17 @@ describe("current month expenses", () => {
     const expensesWithNegativeAmount: Expense[] = [
       {
         id: 1,
-        description: "test1",
+        name: "Chocolate",
         amount: -100,
         date: new Date().toString(),
-        category: "test",
+        category: "Food",
       },
       {
         id: 2,
-        description: "test2",
+        name: "Spaghetti",
         amount: 400,
         date: new Date().toString(),
-        category: "test",
+        category: "Food",
       },
     ];
 

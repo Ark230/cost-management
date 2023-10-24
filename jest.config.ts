@@ -96,7 +96,9 @@ export default {
     "^@domain/(.*)$": "<rootDir>/src/domain/$1",
     "^@data/(.*)$": "<rootDir>/src/data/$1",
     "^@infrastructure/(.*)$": "<rootDir>/src/infrastructure/$1",
-    "^@redux/(.*)$": "<rootDir>/src/redux/$1",
+    "^@network/(.*)$": "<rootDir>/infrastructure/network/$1",
+    "^@services/(.*)$": "<rootDir>/src/application/config/services/$1",
+    "^@redux/(.*)$": "<rootDir>/src/application/config/redux/$1",
     "^@sagas/(.*)$": "<rootDir>/src/infrastructure/redux-saga/$1",
     "^@styles/(.*)$": "<rootDir>/src/styles/$1",
   },
@@ -149,6 +151,7 @@ export default {
   setupFilesAfterEnv: [
     // "@testing-library/react/cleanup-after-each",
     "@testing-library/jest-dom/extend-expect",
+    "<rootDir>/src/mocks.js",
   ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
