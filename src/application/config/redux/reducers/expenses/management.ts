@@ -1,6 +1,9 @@
 import { Expense } from "@/domain/entities/Expense";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { ExpenseSlice } from "@/domain/entities/redux/expense";
+import { current, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  ExpenseManagement,
+  ExpenseSlice,
+} from "@/domain/entities/redux/expense";
 
 export const addExpense = (
   state: ExpenseSlice,
@@ -14,4 +17,25 @@ export const expensesFetched = (
   action: PayloadAction<Expense[]>
 ) => {
   state.content = action.payload;
+};
+
+export const handleExpensesLoader = (
+  state: ExpenseSlice,
+  action: PayloadAction<Record<string, any>>
+) => {
+  const { payload: payloadManagement } = action;
+  const currState = current(state);
+
+  const availableManagement = currState.expenseManagements.find(
+    (currManagement) => currManagement.process === payloadManagement.process
+  );
+
+  if (availableManagement) {
+    const managementsFiltered = currState.expenseManagements.filter(
+      (el) => el.process !== payloadManagement.process
+    );
+    state.expenseManagements = managementsFiltered;
+  }
+
+  state.expenseManagements.push(payloadManagement as ExpenseManagement);
 };
