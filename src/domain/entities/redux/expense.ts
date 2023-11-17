@@ -8,9 +8,18 @@ type Pagination = {
   filtersAndSorters: any[];
 };
 
+export type ExpenseManagement = {
+  isLoading: boolean;
+  process: string;
+  processEnded: boolean;
+  errorMessage?: string | Record<string, any>;
+  successMessage?: string | Record<string, any>;
+};
+
 export interface ExpenseSlice {
   content: Expense[];
   pagination: Pagination;
+  expenseManagements: ExpenseManagement[];
 }
 
 export const initialState: ExpenseSlice = {
@@ -22,4 +31,5 @@ export const initialState: ExpenseSlice = {
     totalPages: 0,
     filtersAndSorters: [],
   },
+  expenseManagements: [],
 };

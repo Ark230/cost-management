@@ -12,6 +12,7 @@ const expensesSlice = createSlice({
   },
 });
 
-export const { addExpense, expensesFetched } = expensesSlice.actions;
+export const { addExpense, expensesFetched, handleExpensesLoader } =
+  expensesSlice.actions;
 
 export default expensesSlice.reducer;

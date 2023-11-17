@@ -11,7 +11,8 @@
       "@redux/*": ["src/application/config/redux/*"],
       "@services/*": ["src/application/config/services/*"],
       "@sagas/*": ["src/infrastructure/redux-saga/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/app/utils/*"]
     },
     "target": "ESNext",
     "useDefineForClassFields": true,
