@@ -16,6 +16,7 @@ export default defineConfig({
       "@redux": path.resolve(__dirname, "./src/application/config/redux"),
       "@sagas": path.resolve(__dirname, "./src/infrastructure/redux-saga"),
       "@styles": path.resolve(__dirname, "./src/styles"),
+      "@utils": path.resolve(__dirname, "./src/app/utils"),
     },
   },
   server: {

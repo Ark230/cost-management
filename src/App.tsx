@@ -6,12 +6,14 @@ import ExpenseTracker from "./app/containers/ExpenseTracker/ExpenseTracker";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import usePopUpNotification from "./app/hooks/usePopUpNotification";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault("America/Santiago");
 
 const App: React.FC = () => {
+  usePopUpNotification();
   return (
     <Provider store={store}>
       <div>
