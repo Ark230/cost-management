@@ -1,9 +1,10 @@
 import { Expense } from "@domain/entities/Expense";
 import styles from "./ExpenseTable.module.scss";
 import { Table, Space, Button } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
+import { ExpensesSharingService } from "@utils/subject-instances";
 
 export interface ExpenseTableProps {
   expenses: Expense[];
@@ -42,6 +43,15 @@ const columns: ColumnsType<Expense> = [
         <Space>
           <DeleteOutlined />
           <span onClick={() => console.log("delete")}>Eliminar</span>
+          <EditOutlined />
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() =>
+              ExpensesSharingService.setSubject({ updateExpense: record })
+            }
+          >
+            Editar
+          </span>
         </Space>
       );
     },

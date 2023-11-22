@@ -9,7 +9,15 @@ const expenses = (client: AxiosInstance): any => ({
     return client.get(baseExpensesURI);
   },
   deleteExpense: ({ pathVariables }: RequestElements) => {
-    return client.delete(manageExpenseURI.replace(":id", pathVariables!.id));
+    return client.delete(
+      manageExpenseURI.replace(":id", String(pathVariables!.id))
+    );
+  },
+  updateExpense: ({ pathVariables, body }: RequestElements) => {
+    return client.patch(
+      manageExpenseURI.replace(":id", String(pathVariables!.id)),
+      body
+    );
   },
 });
 

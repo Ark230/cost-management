@@ -1,5 +1,5 @@
 export interface RequestElements {
-  body?: Record<string, unknown>;
-  pathVariables?: Record<string, string>;
+  body?: Record<string, any>;
+  pathVariables?: Record<string, string | number>;
   queryParams?: Record<string, string | number>;
 }
