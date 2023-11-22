@@ -1,4 +1,9 @@
-// // src/state/types/expenseTypes.ts
-// import { AddExpenseAction } from "../actions/management/expenseActions";
+import { Expense } from "@/domain/entities/Expense";
+import { createAction } from "@reduxjs/toolkit";
 
-// export type ExpenseActionTypes = AddExpenseAction;
+export const addExpense = createAction<Partial<Expense>>(
+  "expenses-types/addExpense"
+);
+export const updateExpense = createAction<Partial<Expense>>(
+  "expenses-types/updateExpense"
+);

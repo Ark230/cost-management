@@ -5,7 +5,7 @@ import {
   ExpenseSlice,
 } from "@/domain/entities/redux/expense";
 
-export const addExpense = (
+export const expenseAdded = (
   state: ExpenseSlice,
   action: PayloadAction<Expense>
 ) => {
