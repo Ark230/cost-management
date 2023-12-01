@@ -1,28 +1,27 @@
 export interface NotificationDetails {
+  process: string;
   title: string;
   description: string;
   type: "success" | "error" | "info";
   additionalHandling?: () => void;
 }
 
-interface Notification {
-  [key: string]: NotificationDetails;
-}
-
 // export const popUpErrorNotifications: Notification = {};
 
-export const popUpSuccessNotifications: Notification = {
-  "expenses/handleExpensesLoader": {
-    title: "Cambio de contraseña exitoso",
-    description: "Hemos actualizado tu nueva contraseña.",
+export const popUpSuccessNotifications: NotificationDetails[] = [
+  {
+    process: "updateExpense",
+    title: "Gasto actualizado",
+    description: "El gasto se ha actualizado correctamente.",
     type: "success",
   },
-};
+];
 
 // export const errorNotificationsActions: string[] = [];
 
 export const successNotificationActions: string[] = [
   "expenses/handleExpensesLoader",
+  "expense/expenseUpdated",
 ];
 
 export const allNotificationsActions: string[] = [
@@ -30,7 +29,17 @@ export const allNotificationsActions: string[] = [
   ...successNotificationActions,
 ];
 
-export const popUpAllNotifications = {
+export const popUpAllNotifications: NotificationDetails[] = [
   // ...popUpNotificationErrors,
   ...popUpSuccessNotifications,
+];
+
+export const getNotificationMessage = (
+  process: string
+): NotificationDetails | undefined => {
+  const notificationMessage = popUpAllNotifications.find(
+    (currNotification) => currNotification.process === process
+  );
+
+  return notificationMessage ? notificationMessage : undefined;
 };

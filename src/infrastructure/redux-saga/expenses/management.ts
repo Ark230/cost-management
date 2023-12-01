@@ -8,6 +8,7 @@ import {
 } from "@/application/config/redux/reducers/expenses";
 import { RequestElements } from "@/domain/types/network";
 import { addExpense, updateExpense } from "@redux/types";
+import { ExpensesSharingService } from "@/app/utils/subject-instances";
 
 function* fetchExpensesSaga(): Generator<any, void, any> {
   try {
@@ -59,10 +60,11 @@ function* updateExpenseSaga(action: PayloadAction<Partial<Expense>>) {
       handleExpensesLoader({
         process: "updateExpense",
         isLoading: true,
+        processEnded: false,
       })
     );
 
-    //SharingService.setSubject({ ongoingManagement: "updateExpense"});
+    ExpensesSharingService.setSubject({ ongoingManagement: "updateExpense" });
 
     const requestElements: RequestElements = {
       pathVariables: {
@@ -75,12 +77,10 @@ function* updateExpenseSaga(action: PayloadAction<Partial<Expense>>) {
       },
     };
 
-    yield delay(2000);
-
-    // const response: Expense[] = yield call(
-    //   expenses.updateExpense,
-    //   requestElements
-    // );
+    const response: Expense = yield call(
+      expenses.updateExpense,
+      requestElements
+    );
 
     yield put(
       handleExpensesLoader({

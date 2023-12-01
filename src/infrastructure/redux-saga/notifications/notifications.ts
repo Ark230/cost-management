@@ -1,8 +1,9 @@
 import { call, takeLatest } from "redux-saga/effects";
 import { NotificationsReplayService } from "@utils/replay-subject-instances";
 import {
-  popUpAllNotifications,
+  // popUpAllNotifications,
   allNotificationsActions,
+  getNotificationMessage,
   //   errorsHandledByAPI,
 } from "./constants";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -10,7 +11,7 @@ import { ExpenseManagement } from "@/domain/entities/redux/expense";
 
 function* displayNotification(action: PayloadAction<ExpenseManagement>) {
   if (action.payload.processEnded) {
-    let notificationMessage = popUpAllNotifications[action.type];
+    let notificationMessage = getNotificationMessage(action.payload.process);
 
     //   const apiErrMessage = errorsHandledByAPI.find(
     //     (currError) => currError.actionType === action.type
@@ -18,11 +19,13 @@ function* displayNotification(action: PayloadAction<ExpenseManagement>) {
 
     //   if (apiErrMessage) errorMessage.description = apiErrMessage.storePath();
 
-    NotificationsReplayService.setSubject({
-      popUpNotificationData: {
-        notificationMessage,
-      },
-    });
+    if (notificationMessage) {
+      NotificationsReplayService.setSubject({
+        popUpNotificationData: {
+          notificationMessage,
+        },
+      });
+    }
 
     /*
     Esto se ejecutará cuando se capture una acción de error del sagas que necesite

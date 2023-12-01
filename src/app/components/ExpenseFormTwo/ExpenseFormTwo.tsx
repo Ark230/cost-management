@@ -3,18 +3,20 @@ import { Expense } from "@/domain/entities/Expense";
 import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import { useDispatch } from "react-redux";
 import { updateExpense } from "@redux/types";
-import { useSelector } from "react-redux";
-import { RootState } from "@/application/config/redux/rootReducer.js";
-import { ExpenseManagement } from "@/domain/entities/redux/expense";
+import useExpenseFormContext from "@hooks/context-hooks/useExpenseFormContext";
 
-interface ExpenseFormTwo {
-  expense: Expense | null;
-  currentManagement: ExpenseManagement | null;
-}
-
-const ExpenseFormTwo = ({ expense, currentManagement }: ExpenseFormTwo) => {
+const ExpenseFormTwo = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const {
+    expenseFormData,
+    expenseFormData: {
+      currentExpense: expense,
+      management: { currentManagement },
+      modal: { createOrUpdate },
+    },
+    setExpenseFormData,
+  } = useExpenseFormContext();
 
   useEffect(() => {
     if (expense) {
@@ -36,6 +38,7 @@ const ExpenseFormTwo = ({ expense, currentManagement }: ExpenseFormTwo) => {
   };
 
   const isLoading = currentManagement ? currentManagement.isLoading : false;
+  const submitText = createOrUpdate === "update" ? "Guardar" : "Crear";
 
   return (
     <Form layout="vertical" form={form} onFinish={onFinish}>
@@ -54,12 +57,21 @@ const ExpenseFormTwo = ({ expense, currentManagement }: ExpenseFormTwo) => {
       <Row justify="end">
         <Space>
           <Col>
-            <Button>Cancelar</Button>
+            <Button
+              onClick={() =>
+                setExpenseFormData({
+                  ...expenseFormData,
+                  modal: { ...expenseFormData.modal, isModalOpen: false },
+                })
+              }
+            >
+              Cancelar
+            </Button>
           </Col>
           <Col>
             <Form.Item style={{ margin: 0 }}>
               <Button loading={isLoading} type="primary" htmlType="submit">
-                Guardar
+                {submitText}
               </Button>
             </Form.Item>
           </Col>
