@@ -1,5 +1,5 @@
 import Modal from "antd/es/modal/Modal";
-import ExpenseFormTwo from "../ExpenseFormTwo/ExpenseFormTwo";
+import ExpenseForm from "../ExpenseForm/ExpenseForm";
 import useExpenseFormContext from "@hooks/context-hooks/useExpenseFormContext";
 
 interface ExpenseFormModal {
@@ -29,7 +29,7 @@ const ExpenseFormModal = ({ title }: ExpenseFormModal) => {
       footer={null}
       cancelText="Cancelar"
     >
-      <ExpenseFormTwo />
+      <ExpenseForm />
     </Modal>
   );
 };

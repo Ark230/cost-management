@@ -29,6 +29,16 @@ const ExpenseFormContainer = () => {
         const hasProperty = (prop: string): boolean =>
           incomingData.hasOwnProperty(prop);
 
+        if (hasProperty("createExpense")) {
+          setExpenseFormData({
+            ...expenseFormData,
+            modal: {
+              createOrUpdate: "create",
+              isModalOpen: true,
+            },
+          });
+        }
+
         if (hasProperty("updateExpense")) {
           setExpenseFormData({
             ...expenseFormData,

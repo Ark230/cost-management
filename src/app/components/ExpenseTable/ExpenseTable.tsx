@@ -1,10 +1,11 @@
 import { Expense } from "@domain/entities/Expense";
-import styles from "./ExpenseTable.module.scss";
-import { Table, Space, Button } from "antd";
+import { Space, Button } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import { ExpensesSharingService } from "@utils/subject-instances";
+import { TableLayout } from "@/app/layout";
+import ContentTable from "@components/ContentTable/ContentTable";
 
 export interface ExpenseTableProps {
   expenses: Expense[];
@@ -61,7 +62,18 @@ const columns: ColumnsType<Expense> = [
 const ExpenseTable = ({ expenses }: ExpenseTableProps) => {
   return (
     <div style={{ maxHeight: "30rem", overflowY: "scroll" }}>
-      <Table columns={columns} dataSource={expenses} />
+      <TableLayout
+        tableHeader={
+          <Button
+            onClick={() => {
+              ExpensesSharingService.setSubject({ createExpense: true });
+            }}
+          >
+            Crear Gasto
+          </Button>
+        }
+        tableContent={<ContentTable columns={columns} dataSource={expenses} />}
+      />
     </div>
   );
 };

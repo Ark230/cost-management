@@ -38,15 +38,47 @@ function* fetchExpensesSaga(): Generator<any, void, any> {
 
 function* addExpenseSaga(action: PayloadAction<Partial<Expense>>) {
   try {
-    // handleExpensesLoader({
-    //   process: "addExpense",
-    //   isLoading: true,
-    // });
-    // const response: Expense[] = yield call(api.get, "/expenses"); // reemplazar con tu endpoint
-    // yield put(fetchExpensesSuccess(response));
-    // handleExpensesLoader({ process: "addExpense", isLoading: false });
+    const {
+      payload: { name, category, amount },
+    } = action;
+
+    const requestElements: RequestElements = {
+      body: {
+        name,
+        category: 1,
+        amount,
+      },
+    };
+
+    yield put(
+      handleExpensesLoader({
+        process: "createExpense",
+        isLoading: true,
+        processEnded: false,
+      })
+    );
+
+    ExpensesSharingService.setSubject({ ongoingManagement: "createExpense" });
+
+    yield call(expenses.addExpense, requestElements);
+
+    yield put(
+      handleExpensesLoader({
+        process: "createExpense",
+        isLoading: false,
+        processEnded: true,
+      })
+    );
   } catch (err) {
-    // maneja el error aquí
+    yield put(
+      handleExpensesLoader({
+        process: "createExpense",
+        isLoading: false,
+        processEnded: true,
+        processEndedWithError: true,
+        error: err,
+      })
+    );
   }
 }
 

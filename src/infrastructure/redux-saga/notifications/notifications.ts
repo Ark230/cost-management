@@ -1,6 +1,7 @@
 import { call, takeLatest } from "redux-saga/effects";
 import { NotificationsReplayService } from "@utils/replay-subject-instances";
 import {
+  OperationResult,
   // popUpAllNotifications,
   allNotificationsActions,
   getNotificationMessage,
@@ -11,7 +12,14 @@ import { ExpenseManagement } from "@/domain/entities/redux/expense";
 
 function* displayNotification(action: PayloadAction<ExpenseManagement>) {
   if (action.payload.processEnded) {
-    let notificationMessage = getNotificationMessage(action.payload.process);
+    const successOrError = action.payload.processEndedWithError
+      ? OperationResult.ERROR
+      : OperationResult.SUCCESS;
+
+    let notificationMessage = getNotificationMessage(
+      action.payload.process,
+      successOrError
+    );
 
     //   const apiErrMessage = errorsHandledByAPI.find(
     //     (currError) => currError.actionType === action.type

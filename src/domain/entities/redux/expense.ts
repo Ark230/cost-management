@@ -12,7 +12,8 @@ export type ExpenseManagement = {
   isLoading: boolean;
   process: string;
   processEnded: boolean;
-  errorMessage?: string | Record<string, any>;
+  processEndedWithError?: boolean;
+  error?: string | Record<string, any>;
   successMessage?: string | Record<string, any>;
 };
 

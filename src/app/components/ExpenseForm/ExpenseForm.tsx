@@ -1,74 +1,87 @@
-// src/app/containers/ExpenseTracker/components/ExpenseForm.tsx
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { Expense } from "@/domain/entities/Expense";
+import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import { useDispatch } from "react-redux";
-import { Expense } from "@domain/entities/Expense";
-import styles from "./ExpenseForm.module.scss";
-import { addExpense } from "@redux/types";
+import { updateExpense, addExpense } from "@redux/types";
+import useExpenseFormContext from "@hooks/context-hooks/useExpenseFormContext";
 
-interface ExpenseFormProps {
-  categories: string[];
-}
-
-const ExpenseForm = ({ categories }: ExpenseFormProps) => {
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState<number>(0);
-  const [category, setCategory] = useState("");
+const ExpenseForm = () => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const {
+    expenseFormData,
+    expenseFormData: {
+      currentExpense: expense,
+      management: { currentManagement },
+      modal: { createOrUpdate },
+    },
+    setExpenseFormData,
+  } = useExpenseFormContext();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!description.trim() || amount <= 0 || !category.trim()) return;
+  useEffect(() => {
+    if (expense) {
+      form.setFieldValue("name", expense.name);
+      form.setFieldValue("category", expense.category);
+      form.setFieldValue("amount", expense.amount);
+    }
+  }, [expense]);
 
-    const newExpense: Expense = {
-      id: Date.now(),
-      name: description,
-      amount,
-      date: new Date().toISOString(),
-      category,
+  const onFinish = (formValues: Partial<Expense>) => {
+    const newExpense: Partial<Expense> = {
+      id: expense!.id,
+      name: formValues.name,
+      amount: formValues.amount,
+      category: formValues.category,
     };
 
-    dispatch(addExpense(newExpense));
-    setDescription("");
-    setAmount(0);
-    setCategory("");
+    if (expenseFormData.modal.createOrUpdate === "update") {
+      dispatch(updateExpense(newExpense));
+    } else {
+      dispatch(addExpense(newExpense));
+    }
   };
 
+  const isLoading = currentManagement ? currentManagement.isLoading : false;
+  const submitText = createOrUpdate === "update" ? "Guardar" : "Crear";
+
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="description">Expense Name:</label>
-      <input
-        name="expense-description"
-        type="text"
-        id="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <label htmlFor="amount">Amount:</label>
-      <input
-        name="expense-amount"
-        type="number"
-        id="amount"
-        step="0.01"
-        min="0"
-        value={amount}
-        onChange={(e) => setAmount(parseFloat(e.target.value))}
-      />
-      <label htmlFor="category">Category:</label>
-      <select
-        name="expense-category"
-        id="category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      >
-        <option value="">Select a category</option>
-        {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Add Expense</button>
-    </form>
+    <Form layout="vertical" form={form} onFinish={onFinish}>
+      <Form.Item label="Nombre" name="name">
+        <Input size="large" />
+      </Form.Item>
+      <Form.Item label="Categoría" name="category">
+        <Select>
+          <Select.Option>Videojuegos</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="Monto" name="amount">
+        <Input size="large" type="number" />
+      </Form.Item>
+
+      <Row justify="end">
+        <Space>
+          <Col>
+            <Button
+              onClick={() =>
+                setExpenseFormData({
+                  ...expenseFormData,
+                  modal: { ...expenseFormData.modal, isModalOpen: false },
+                })
+              }
+            >
+              Cancelar
+            </Button>
+          </Col>
+          <Col>
+            <Form.Item style={{ margin: 0 }}>
+              <Button loading={isLoading} type="primary" htmlType="submit">
+                {submitText}
+              </Button>
+            </Form.Item>
+          </Col>
+        </Space>
+      </Row>
+    </Form>
   );
 };
 
